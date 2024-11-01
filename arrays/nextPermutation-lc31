@@ -1,0 +1,37 @@
+def nextPermutation(self, nums: list[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        # it doesn't matter what left is
+        left, last = -1, len(nums) - 1
+        # [left, ..., last]
+
+        # if len(nums) > 1 and nums[left] > nums[left+1]:
+        #     nums.reverse()
+        #     return
+
+        # 1. start from beginning, find the 1st index
+        # where nums[left] < nums[left+1]
+        # range(start, end, inc)
+        for i in range(last, 0, -1):
+            if nums[i-1] < nums[i]:
+                left = i - 1
+                break
+        
+        if left == -1:
+            nums.reverse()
+            return
+        
+        # print(left)
+
+        for i in range(last, 0, -1):
+            if nums[left] < nums[i]:
+                # swap two
+                temp = nums[left]
+                nums[left] = nums[i]
+                nums[i] = temp
+                break
+            
+
+        # reverse rest of nums list after index
+        nums[left+1:] = nums[left+1:][::-1]
