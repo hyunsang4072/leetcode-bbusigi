@@ -1,4 +1,4 @@
-def repeatedNumber(self, nums: list[int]) -> list[int]:
+def setMismatch(self, nums: list[int]) -> list[int]:
     minVal = float("inf") # inf
     maxVal = float("-inf") # -inf
     
