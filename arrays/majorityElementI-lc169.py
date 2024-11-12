@@ -1,4 +1,4 @@
-def majorityElement(self, nums: List[int]) -> int:
+def majorityElement(self, nums: list[int]) -> int:
     # hashMap approach
     # seen = {}
 
