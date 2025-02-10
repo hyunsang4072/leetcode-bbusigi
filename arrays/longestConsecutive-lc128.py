@@ -1,22 +1,12 @@
 def longestConsecutive(self, nums: list[int]) -> int:
-    # can't use sorting --> O(nlogn)
-    
-    seen = set() # unordered
+    hashSet = set(nums)
 
-    for i in range(len(nums)):
-        seen.add(nums[i])
-    
     longest = 0
-
-    # find starting point
-    # find longest from start
-    for j in seen:
-        if j-1 not in seen: # start point found; else ignore current
-            c = 1
-            while j+1 in seen: # count how long our consecutive sequence is from start
-                c += 1
-                j += 1
-            if c > longest: # update if needed
-                longest = c
+    for n in hashSet: # DO NOT use original list since we want to skip duplicates!!!
+        if (n-1) not in hashSet: # n is starting point of a sequence
+            count = 1
+            while (n + count) in hashSet: # O(1)
+                count += 1
+            longest = max(longest, count)
     
     return longest
