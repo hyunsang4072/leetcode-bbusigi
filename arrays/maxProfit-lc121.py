@@ -1,11 +1,14 @@
 def maxProfit(self, prices: list[int]) -> int:
-    # we have to move forward so we can't just find min/max and find the difference between the two.
-    # we use a loop to look at each day's price
-    maxProf = 0
-    minPrice = prices[0]
+    res = 0
 
-    for i in range(len(prices)):
-        minPrice = min(minPrice, prices[i]) # update minPrice
-        maxProf = max(maxProf, prices[i] - minPrice) # update maxProf if possible
+    l, r = 0, 1
+    while r < len(prices):
+        if prices[r] > prices[l]: # profitable
+            profit = prices[r] - prices[l]
+            res = max(res, profit)
+        else: # not profitable and since we checked all values up to where right pointer is
+        # we can just skip those values by moving left pointer to where right pointer is
+            l = r
+        r += 1
     
-    return maxProf
+    return res
