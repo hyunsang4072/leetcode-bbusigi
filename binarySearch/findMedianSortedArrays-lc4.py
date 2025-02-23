@@ -13,6 +13,10 @@ def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]) -> float:
     while True: # finding a median is guaranteed
         i = (l + r) // 2 # middle point of A
         j = half - i - 2 # middle point of B
+        # i.e, half = size of merged array // 2
+        # (i + 1) + (j + 1) = half
+        # j + 1 = half - (i + 1)
+        # j = half - (i + 1) - 1 = half - i - 2
 
         Aleft = A[i] if i >= 0 else float("-infinity")
         Aright = A[i+1] if (i+1) < len(A) else float("infinity")
