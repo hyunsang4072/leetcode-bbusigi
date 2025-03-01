@@ -1,6 +1,7 @@
 def hasCycle(self, head: Optional[ListNode]) -> bool:
-    dummy = ListNode(next=head)
-    slow, fast = dummy, dummy
+    # TC: O(n)
+    # SC: O(1)
+    slow, fast = head, head
 
     while fast and fast.next:
         slow = slow.next
