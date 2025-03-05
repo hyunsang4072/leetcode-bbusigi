@@ -1,31 +1,23 @@
-def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    # do NOT use hashMap for this problem!!!
-    # res = None
-    # seen = {}
+def findDuplicate(self, nums: list[int]) -> int:
+    # Optimal Soln. using LL + Floyd's algo... (very unintuitive)
+    # TC: O(n)
+    # SC: O(1)
 
-    # dummy = head
-    # while dummy:
-    #     node = dummy
-    #     if node in seen:
-    #         return node
-    #     seen[node] = 1
-    #     dummy = dummy.next
+    slow, fast = 0, 0
+
+    # detect a cycle
+    while True:
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+        if slow == fast: # they are at some intersection within a cycle
+            break
     
-    # return res
-
-    # use fast&slow algo(tortoise) --> optimal        
-    slow, fast = head, head
-
-    while fast and fast.next:
-        slow = slow.next
-        fast = fast.next.next
-        if slow == fast: # found a cycle
-            dummy = head
-            while True:
-                if dummy == fast:
-                    return dummy
-                dummy = dummy.next
-                fast = fast.next
-    
-    # no cycle
-    return None
+    # initialize another slow ptr that starts at the beginning
+    # by Floyd's algo, we know for sure that the slow and slow2 ptrs will
+    # meet at the beginning of the cycle as long as there's a cycle
+    slow2 = 0
+    while True:
+        slow = nums[slow]
+        slow2 = nums[slow2]
+        if slow == slow2:
+            return slow
