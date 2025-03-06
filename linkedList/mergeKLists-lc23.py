@@ -27,6 +27,8 @@ def mergeKLists(self, lists: list[Optional[ListNode]]) -> Optional[ListNode]:
             # merge two lists and append it to res list
             # until we end up with just one big sorted list
             mergedList.append(self.merge(l1, l2))
+        
+        # we need this so that we don't get caught in infinite loop
         lists = mergedList
     
     return lists[0] # one big sorted list
