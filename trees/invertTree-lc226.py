@@ -6,6 +6,7 @@
 #         self.right = right
 
 def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    # pretty basic DFS problem
     if not root:
         return None
     
