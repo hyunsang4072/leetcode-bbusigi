@@ -1,6 +1,8 @@
 def maxProduct(self, nums: List[int]) -> int:
     # Kadane's Algo
     # keep the curMax, curMin to update future max values
+    # e.g., nums = [2, 3, -2, 4] 
+    # (2, 2), (6, 3), (-2, -12), (4, -48)
     # TC: O(n)
     # SC: O(1)
     res = nums[0]
