@@ -1,4 +1,6 @@
 def canPartition(self, nums: List[int]) -> bool:
+    # TC: O(n*t), where n=len(nums), t=sum of array elements divided by 2
+    # SC: O(t), where t=sum of array elements divided by 2
     # in order for two subsets to have sums equal to one another,
     # they should have a sum that's equal to half of total sum
     total = sum(nums)
