@@ -1,36 +1,34 @@
-def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]) -> float:
-    # TC: O(log(min(n, m)))
-    # SC: O(1)
+def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
     A, B = nums1, nums2
-    total = len(A) + len(B)
-    half = total // 2 # integer division
+    total = len(nums1) + len(nums2)
+    half = total // 2 # used for indexing
 
-    # we want A to be smaller than B
-    if len(B) < len(A):
-        A, B = B, A
+    # let A, B = shortArr, longArr
+    if len(nums1) > len(nums2):
+        A, B = nums2, nums1
     
+    # run binary search on A(short)
     l, r = 0, len(A) - 1
-    while True: # finding a median is guaranteed
-        i = (l + r) // 2 # middle point of A
-        j = half - i - 2 # middle point of B
-        # i.e, half = size of merged array // 2
-        # (i + 1) + (j + 1) = half
-        # j + 1 = half - (i + 1)
-        # j = half - (i + 1) - 1 = half - i - 2
+    while True: # i'm not sure why we don't use l <= r
+        i = (l + r) // 2 # m for A
+        j = half - (i + 1) - 1 # m for B
 
-        Aleft = A[i] if i >= 0 else float("-infinity")
-        Aright = A[i+1] if (i+1) < len(A) else float("infinity")
-        Bleft = B[j] if j >= 0 else float("-infinity")
-        Bright = B[j+1] if (j+1) < len(B) else float("infinity")
+        # retrieve element at each index
+        ALeft = A[i] if i >= 0 else float("-inf")
+        BLeft = B[j] if j >= 0 else float("-inf")
+        ARight = A[i + 1] if (i + 1) < len(A) else float("inf")
+        BRight = B[j + 1] if (j + 1) < len(B) else float("inf")
 
-        # partition is correct
-        if Aleft <= Bright and Bleft <= Aright:
-            # odd of elements
-            if total % 2: # 1 is True in Python
-                return min(Aright, Bright)
-            # even
-            return (max(Aleft, Bleft) + min(Aright, Bright)) / 2
-        elif Aleft > Bright:
+        if BLeft <= ARight and ALeft <= BRight:
+            # we found the correct left,right partitions
+            # total length is odd
+            if total % 2:
+                return min(ARight, BRight)
+            return (min(ARight, BRight) + max(ALeft, BLeft)) / 2
+        elif ALeft > BRight:
             r = i - 1
-        else: # Bleft <= Aright is False
+        else:
             l = i + 1
+
+    # we don't have to return anything ourselves
+    # since we are guaranteed to find the median value
