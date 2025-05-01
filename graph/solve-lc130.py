@@ -4,6 +4,9 @@ def solve(self, board: List[List[str]]) -> None:
     """
     # TC: O(m * n)
     # SC: O(m * n)
+    # the idea is to mark cells if they are either:
+    # 1) 'O's on the edge
+    # 2) 'O's that's connected to edge 'O's
     ROW, COL = len(board), len(board[0])
     directions = [(0, 1), (0, -1), (-1, 0), (1, 0)] # right, left, up, down
 
