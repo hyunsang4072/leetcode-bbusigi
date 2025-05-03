@@ -4,11 +4,11 @@ def validTree(self, n: int, edges: List[List[int]]) -> bool:
     adj = defaultdict(list)
     for n1, n2 in edges:
         adj[n1].append(n2)
-        adj[n2].append(n1)
+        adj[n2].append(n1) # undirected graph
     
     # check1: #Nodes = #Edges + 1 <- Tree property
     if n != len(edges) + 1:
-        return False
+        return False # not a Tree
     
     # check2: are all nodes connected == is our graph a connected graph?
     def dfs(i, prev):
